@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Joseph Grand Hotel | Baggao, Cagayan, Philippines</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Color Palette Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        hotel: {
+                            green: '#0D5C3A',       /* Emerald Green */
+                            darkgreen: '#063B24',   /* Deep Forest Green */
+                            lightgreen: '#E8F5E9',  /* Soft Green Tint */
+                            gold: '#FCC010',        /* Gold / Warm Yellow */
+                            brightgold: '#FFD700',  /* Bright Gold Accent */
+                            cream: '#FFFDF0'        /* Cream Soft Yellow Tint */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .hero-banner {
+            background: linear-gradient(rgba(13, 92, 58, 0.85), rgba(6, 59, 36, 0.90)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen selection:bg-hotel-gold selection:text-hotel-darkgreen">
+
+    <!-- Top Promo Bar -->
+    <div class="bg-hotel-gold text-hotel-darkgreen py-2 px-4 text-xs sm:text-sm font-semibold text-center border-b border-yellow-400 shadow-inner flex items-center justify-center gap-2">
+        <span class="bg-hotel-darkgreen text-hotel-gold text-[10px] sm:text-xs px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Promo</span>
+        <span>Special Weekend Discount! Get 15% off on Family Villas in Baggao, Cagayan</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="bg-hotel-green text-white sticky top-0 z-50 shadow-lg border-b-4 border-hotel-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Hotel Logo Emblem -->
+                <div class="flex items-center space-x-3 cursor-pointer group" onclick="scrollToSection('home')">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white p-1 border-2 border-hotel-gold flex items-center justify-center shadow-md group-hover:scale-105 transition-transform shrink-0">
+                        <div class="w-full h-full rounded-full bg-hotel-green flex items-center justify-center text-hotel-gold font-extrabold text-xl sm:text-2xl">
+                            <i class="fa-solid fa-hotel"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-base sm:text-xl tracking-tight leading-tight text-white group-hover:text-hotel-gold transition-colors">
+                            St. Joseph Grand Hotel
+                        </h1>
+                        <p class="text-[11px] sm:text-xs text-hotel-gold font-semibold tracking-wider uppercase">
+                            San Jose, Baggao • Cagayan
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                    <a href="#home" class="text-white hover:text-hotel-gold transition-colors py-2"><i class="fa-solid fa-house mr-1 text-hotel-gold"></i> Home</a>
+                    <a href="#rooms" class="text-white hover:text-hotel-gold transition-colors py-2"><i class="fa-solid fa-bed mr-1 text-hotel-gold"></i> Rooms & Suites</a>
+                    <a href="#amenities" class="text-white hover:text-hotel-gold transition-colors py-2"><i class="fa-solid fa-bell-concierge mr-1 text-hotel-gold"></i> Amenities</a>
+                    <a href="#reviews" class="text-white hover:text-hotel-gold transition-colors py-2"><i class="fa-solid fa-star mr-1 text-hotel-gold"></i> Reviews</a>
+                    <a href="#booking" class="bg-hotel-gold text-hotel-darkgreen font-bold px-4 py-2 rounded-xl hover:bg-yellow-400 transition-all shadow-md transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-calendar-check mr-1"></i> Book Now
+                    </a>
+                </nav>
+
+                <!-- Mobile Navigation Toggle Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="p-2.5 rounded-lg text-white hover:bg-hotel-darkgreen focus:outline-none transition-colors" aria-label="Toggle Navigation">
+                        <i id="menu-icon" class="fa-solid fa-bars text-2xl text-hotel-gold"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-hotel-darkgreen border-t border-green-800 px-4 pt-3 pb-5 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-medium text-white hover:bg-hotel-green"><i class="fa-solid fa-house w-6 text-hotel-gold"></i> Home</a>
+            <a href="#rooms" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-medium text-white hover:bg-hotel-green"><i class="fa-solid fa-bed w-6 text-hotel-gold"></i> Rooms & Suites</a>
+            <a href="#amenities" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-medium text-white hover:bg-hotel-green"><i class="fa-solid fa-bell-concierge w-6 text-hotel-gold"></i> Amenities</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-medium text-white hover:bg-hotel-green"><i class="fa-solid fa-star w-6 text-hotel-gold"></i> Reviews</a>
+            <a href="#booking" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-bold text-hotel-darkgreen bg-hotel-gold hover:bg-yellow-400"><i class="fa-solid fa-calendar-check w-6"></i> Book a Room</a>
+        </div>
+    </header>
+
+    <!-- Hero Banner with Quick Search Bar -->
+    <section id="home" class="hero-banner text-white py-16 lg:py-24 px-4 relative">
+        <div class="max-w-5xl mx-auto text-center space-y-6">
+            <div class="inline-flex items-center space-x-2 bg-hotel-gold/20 text-hotel-gold border border-hotel-gold/40 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide uppercase">
+                <i class="fa-solid fa-star"></i>
+                <span>Luxury Accommodation in Baggao, Cagayan</span>
+            </div>
+            
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                Welcome to <span class="text-hotel-gold">St. Joseph Grand Hotel</span>
+            </h1>
+            
+            <p class="text-base sm:text-lg lg:text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed">
+                Experience warm Cagayano hospitality, cozy rooms, exquisite dining, and breathtaking views near Blu Water Falls & Duba Cave.
+            </p>
+
+            <!-- Quick Search Bar -->
+            <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-2xl text-gray-800 max-w-4xl mx-auto border-2 border-hotel-gold mt-8">
+                <form onsubmit="handleQuickSearch(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end text-left">
+                    <div>
+                        <label class="block text-xs font-bold text-hotel-darkgreen uppercase mb-1"><i class="fa-solid fa-calendar-day text-hotel-gold mr-1"></i> Check-In</label>
+                        <input type="date" id="qs-checkin" required class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-hotel-green text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-hotel-darkgreen uppercase mb-1"><i class="fa-solid fa-calendar-check text-hotel-gold mr-1"></i> Check-Out</label>
+                        <input type="date" id="qs-checkout" required class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-hotel-green text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-hotel-darkgreen uppercase mb-1"><i class="fa-solid fa-bed text-hotel-gold mr-1"></i> Room Type</label>
+                        <select id="qs-room" class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-hotel-green text-sm bg-white">
+                            <option value="Deluxe Room">Deluxe Room (₱2,500/night)</option>
+                            <option value="Executive Suite">Executive Suite (₱4,200/night)</option>
+                            <option value="Family Villa">Family Villa (₱6,500/night)</option>
+                            <option value="Standard Twin Room">Standard Twin Room (₱1,800/night)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-hotel-green text-hotel-gold font-bold py-2.5 px-4 rounded-xl hover:bg-hotel-darkgreen transition-all shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <span>Find Room</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Showcase Section -->
+    <section id="rooms" class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-hotel-green font-bold text-xs uppercase tracking-widest bg-hotel-lightgreen px-3 py-1 rounded-full">Accommodations</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-hotel-darkgreen mt-2">Rooms & Luxury Suites</h2>
+                <div class="w-16 h-1.5 bg-hotel-gold mx-auto my-3 rounded-full"></div>
+                <p class="text-gray-600">Thoughtfully designed for comfort, leisure, and business travelers visiting Baggao.</p>
+            </div>
+
+            <!-- Rooms Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Deluxe Room -->
+                <div class="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 bg-gray-200">
+                            <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=600&auto=format&fit=crop" alt="Deluxe Room" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-hotel-gold text-hotel-darkgreen font-bold text-xs px-3 py-1 rounded-full shadow">
+                                ₱2,500 / night
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-lg text-hotel-darkgreen mb-1">Deluxe King Room</h3>
+                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-group text-hotel-gold mr-1"></i> Up to 2 Guests • 1 King Bed</p>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-4">Perfect for couples and solo adventurers with scenic views of Baggao valley.</p>
+                            
+                            <div class="flex flex-wrap gap-2 text-[11px] text-gray-600 font-medium">
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-wifi text-hotel-green mr-1"></i> Free Wi-Fi</span>
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-snowflake text-hotel-green mr-1"></i> AC</span>
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-mug-hot text-hotel-green mr-1"></i> Breakfast</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button onclick="selectRoomForBooking('Deluxe Room')" class="w-full bg-hotel-green text-white font-semibold py-2 rounded-xl hover:bg-hotel-darkgreen transition-colors text-sm">
+                            Book Deluxe Room
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Executive Suite -->
+                <div class="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 bg-gray-200">
+                            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=600&auto=format&fit=crop" alt="Executive Suite" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-hotel-gold text-hotel-darkgreen font-bold text-xs px-3 py-1 rounded-full shadow">
+                                ₱4,200 / night
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-lg text-hotel-darkgreen mb-1">Executive Suite</h3>
+                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-group text-hotel-gold mr-1"></i> Up to 3 Guests • Living Area</p>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-4">Spacious suite with private lounge, balcony access, and premium amenities.</p>
+                            
+                            <div class="flex flex-wrap gap-2 text-[11px] text-gray-600 font-medium">
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-tv text-hotel-green mr-1"></i> Smart TV</span>
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-bath text-hotel-green mr-1"></i> Bathtub</span>
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-utensils text-hotel-green mr-1"></i> Room Service</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button onclick="selectRoomForBooking('Executive Suite')" class="w-full bg-hotel-green text-white font-semibold py-2 rounded-xl hover:bg-hotel-darkgreen transition-colors text-sm">
+                            Book Executive Suite
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Family Villa -->
+                <div class="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 bg-gray-200">
+                            <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=600&auto=format&fit=crop" alt="Family Villa" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-hotel-gold text-hotel-darkgreen font-bold text-xs px-3 py-1 rounded-full shadow">
+                                ₱6,500 / night
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-lg text-hotel-darkgreen mb-1">Family Villa</h3>
+                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-group text-hotel-gold mr-1"></i> Up to 6 Guests • 2 Queen Beds</p>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-4">Complete private villa with dining space, perfect for families exploring Cagayan.</p>
+                            
+                            <div class="flex flex-wrap gap-2 text-[11px] text-gray-600 font-medium">
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-kitchen-set text-hotel-green mr-1"></i> Kitchenette</span>
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-square-parking text-hotel-green mr-1"></i> Parking</span>
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-water-ladder text-hotel-green mr-1"></i> Pool View</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button onclick="selectRoomForBooking('Family Villa')" class="w-full bg-hotel-green text-white font-semibold py-2 rounded-xl hover:bg-hotel-darkgreen transition-colors text-sm">
+                            Book Family Villa
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Standard Twin Room -->
+                <div class="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 bg-gray-200">
+                            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=600&auto=format&fit=crop" alt="Standard Twin" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-hotel-gold text-hotel-darkgreen font-bold text-xs px-3 py-1 rounded-full shadow">
+                                ₱1,800 / night
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-lg text-hotel-darkgreen mb-1">Standard Twin Room</h3>
+                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-group text-hotel-gold mr-1"></i> Up to 2 Guests • 2 Single Beds</p>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-4">Budget-friendly cozy setup tailored for friends and business travelers.</p>
+                            
+                            <div class="flex flex-wrap gap-2 text-[11px] text-gray-600 font-medium">
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-wifi text-hotel-green mr-1"></i> Free Wi-Fi</span>
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-snowflake text-hotel-green mr-1"></i> AC</span>
+                                <span class="bg-white px-2 py-1 rounded border"><i class="fa-solid fa-shower text-hotel-green mr-1"></i> Hot Shower</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button onclick="selectRoomForBooking('Standard Twin Room')" class="w-full bg-hotel-green text-white font-semibold py-2 rounded-xl hover:bg-hotel-darkgreen transition-colors text-sm">
+                            Book Twin Room
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="py-16 bg-hotel-lightgreen border-b border-green-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-hotel-green font-bold text-xs uppercase tracking-widest bg-white px-3 py-1 rounded-full border border-green-200">Hotel Services</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-hotel-darkgreen mt-2">World-Class Amenities</h2>
+                <div class="w-16 h-1.5 bg-hotel-gold mx-auto my-3 rounded-full"></div>
+                <p class="text-gray-600">Enjoy relaxing facilities designed to make your stay in Baggao memorable.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Amenity 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-green-100 shadow-sm flex items-start space-x-4">
+                    <div class="p-3 bg-hotel-green text-hotel-gold rounded-xl text-2xl shrink-0">
+                        <i class="fa-solid fa-water-ladder"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-hotel-darkgreen text-base mb-1">Swimming Pool & Deck</h3>
+                        <p class="text-xs text-gray-600">Outdoor swimming pool with sun loungers and kids area.</p>
+                    </div>
+                </div>
+
+                <!-- Amenity 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-green-100 shadow-sm flex items-start space-x-4">
+                    <div class="p-3 bg-hotel-green text-hotel-gold rounded-xl text-2xl shrink-0">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-hotel-darkgreen text-base mb-1">San Jose Bistro & Cafe</h3>
+                        <p class="text-xs text-gray-600">Authentic Cagayano dishes, fresh coffee, and international breakfasts.</p>
+                    </div>
+                </div>
+
+                <!-- Amenity 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-green-100 shadow-sm flex items-start space-x-4">
+                    <div class="p-3 bg-hotel-green text-hotel-gold rounded-xl text-2xl shrink-0">
+                        <i class="fa-solid fa-champagne-glasses"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-hotel-darkgreen text-base mb-1">Events & Function Hall</h3>
+                        <p class="text-xs text-gray-600">Spacious hall accommodating up to 250 guests for weddings and seminars.</p>
+                    </div>
+                </div>
+
+                <!-- Amenity 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-green-100 shadow-sm flex items-start space-x-4">
+                    <div class="p-3 bg-hotel-green text-hotel-gold rounded-xl text-2xl shrink-0">
+                        <i class="fa-solid fa-square-parking"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-hotel-darkgreen text-base mb-1">Free Parking Lot</h3>
+                        <p class="text-xs text-gray-600">Gated and secure parking space for all guest vehicles and tour buses.</p>
+                    </div>
+                </div>
+
+                <!-- Amenity 5 -->
+                <div class="bg-white p-6 rounded-2xl border border-green-100 shadow-sm flex items-start space-x-4">
+                    <div class="p-3 bg-hotel-green text-hotel-gold rounded-xl text-2xl shrink-0">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-hotel-darkgreen text-base mb-1">24/7 Security & Desk</h3>
+                        <p class="text-xs text-gray-600">Round-the-clock front desk assistance, CCTV, and local tour guidance.</p>
+                    </div>
+                </div>
+
+                <!-- Amenity 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-green-100 shadow-sm flex items-start space-x-4">
+                    <div class="p-3 bg-hotel-green text-hotel-gold rounded-xl text-2xl shrink-0">
+                        <i class="fa-solid fa-van-shuttle"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-hotel-darkgreen text-base mb-1">Baggao Tour Shuttle</h3>
+                        <p class="text-xs text-gray-600">Arranged transportation to Duba Cave and Blu Water Falls.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guest Testimonials -->
+    <section id="reviews" class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-hotel-green font-bold text-xs uppercase tracking-widest bg-hotel-lightgreen px-3 py-1 rounded-full">Testimonials</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-hotel-darkgreen mt-2">What Our Guests Say</h2>
+                <div class="w-16 h-1.5 bg-hotel-gold mx-auto my-3 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Review 1 -->
+                <div class="bg-hotel-cream p-6 rounded-2xl border border-yellow-200 shadow-sm">
+                    <div class="text-hotel-gold text-sm mb-2">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-gray-700 italic mb-4">"The best hotel experience in Baggao! Clean rooms, fast Wi-Fi, and delicious Cagayano food at the bistro. Very close to Blu Water Falls!"</p>
+                    <div class="font-bold text-xs text-hotel-darkgreen">- Mark V., Manila</div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-hotel-lightgreen p-6 rounded-2xl border border-green-200 shadow-sm">
+                    <div class="text-hotel-gold text-sm mb-2">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-gray-700 italic mb-4">"We booked the Family Villa for our weekend getaway in Cagayan. Super friendly staff and comfortable beds."</p>
+                    <div class="font-bold text-xs text-hotel-darkgreen">- Elena R., Tuguegarao City</div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-hotel-cream p-6 rounded-2xl border border-yellow-200 shadow-sm">
+                    <div class="text-hotel-gold text-sm mb-2">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-gray-700 italic mb-4">"Great venue for our seminar. The function hall is clean and the hotel shuttle made tour arrangements easy."</p>
+                    <div class="font-bold text-xs text-hotel-darkgreen">- Engineer Santos, Aparri</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Booking Engine Form (Bottom Section) -->
+    <section id="booking" class="py-16 bg-hotel-lightgreen border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="bg-hotel-cream p-6 sm:p-10 rounded-3xl border-2 border-hotel-gold shadow-xl relative">
+                <div class="text-center mb-8">
+                    <span class="text-hotel-green font-bold text-xs uppercase tracking-widest bg-white px-3 py-1 rounded-full border border-yellow-300">Instant Reservation</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-hotel-darkgreen mt-2">Book Your Stay at St. Joseph Hotel</h2>
+                    <p class="text-xs text-gray-600 mt-1">Fill out the form below to confirm your room reservation.</p>
+                </div>
+
+                <!-- Notification Alert -->
+                <div id="booking-alert" class="hidden mb-6 p-4 rounded-xl text-sm"></div>
+
+                <form id="reservationForm" onsubmit="handleFormBooking(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="guestName" class="block text-xs font-bold text-gray-700 uppercase mb-1">Guest Full Name *</label>
+                            <input type="text" id="guestName" required placeholder="e.g. Juan Dela Cruz"
+                                class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-hotel-green outline-none text-sm bg-white">
+                        </div>
+                        <div>
+                            <label for="guestPhone" class="block text-xs font-bold text-gray-700 uppercase mb-1">Phone Number *</label>
+                            <input type="tel" id="guestPhone" required placeholder="0917 123 4567"
+                                class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-hotel-green outline-none text-sm bg-white">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="guestEmail" class="block text-xs font-bold text-gray-700 uppercase mb-1">Email Address *</label>
+                            <input type="email" id="guestEmail" required placeholder="juan@example.com"
+                                class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-hotel-green outline-none text-sm bg-white">
+                        </div>
+                        <div>
+                            <label for="roomType" class="block text-xs font-bold text-gray-700 uppercase mb-1">Select Room *</label>
+                            <select id="roomType" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-hotel-green outline-none text-sm bg-white">
+                                <option value="Deluxe Room">Deluxe Room (₱2,500 / night)</option>
+                                <option value="Executive Suite">Executive Suite (₱4,200 / night)</option>
+                                <option value="Family Villa">Family Villa (₱6,500 / night)</option>
+                                <option value="Standard Twin Room">Standard Twin Room (₱1,800 / night)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="checkInDate" class="block text-xs font-bold text-gray-700 uppercase mb-1">Check-In Date *</label>
+                            <input type="date" id="checkInDate" required
+                                class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-hotel-green outline-none text-sm bg-white">
+                        </div>
+                        <div>
+                            <label for="checkOutDate" class="block text-xs font-bold text-gray-700 uppercase mb-1">Check-Out Date *</label>
+                            <input type="date" id="checkOutDate" required
+                                class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-hotel-green outline-none text-sm bg-white">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="specialRequests" class="block text-xs font-bold text-gray-700 uppercase mb-1">Special Request</label>
+                        <textarea id="specialRequests" rows="3" placeholder="Airport transfer, extra pillows, early check-in requests..."
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-hotel-green outline-none text-sm bg-white"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-hotel-green text-hotel-gold font-bold py-3.5 rounded-xl hover:bg-hotel-darkgreen transition-all shadow-md flex items-center justify-center space-x-2 text-base">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Confirm & Reserve Room</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manage Hotel Reservations Table (Database Simulator) -->
+    <section id="reservations" class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
+                <div>
+                    <span class="text-hotel-green font-bold text-xs uppercase tracking-widest bg-hotel-lightgreen px-3 py-1 rounded-full border border-green-200">Database Simulator</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-hotel-darkgreen mt-1">Manage Hotel Reservations</h2>
+                    <p class="text-xs text-gray-600">Real-time room management powered by local browser storage (`localStorage`).</p>
+                </div>
+                <button onclick="clearAllBookings()" class="mt-4 sm:mt-0 text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-2 rounded-lg flex items-center gap-1.5 w-fit">
+                    <i class="fa-solid fa-trash-can"></i> Clear All Reservations
+                </button>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-gray-600">
+                        <thead class="bg-hotel-green text-white text-xs uppercase tracking-wider">
+                            <tr>
+                                <th class="py-3.5 px-4">Ref No.</th>
+                                <th class="py-3.5 px-4">Guest Name</th>
+                                <th class="py-3.5 px-4">Phone</th>
+                                <th class="py-3.5 px-4">Email</th>
+                                <th class="py-3.5 px-4">Room Selected</th>
+                                <th class="py-3.5 px-4">Check-In / Out</th>
+                                <th class="py-3.5 px-4">Special Request</th>
+                                <th class="py-3.5 px-4 text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservations-body" class="divide-y divide-gray-100">
+                            <!-- Dynamically populated via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-hotel-darkgreen text-white mt-auto border-t-4 border-hotel-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold text-lg text-hotel-gold mb-2"><i class="fa-solid fa-hotel mr-2"></i>St. Joseph Grand Hotel</h3>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        San Jose, Baggao, Cagayan Valley, Philippines 3506.<br>
+                        Your premier destination for luxury accommodation, events, and relaxation in Baggao.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm text-white uppercase tracking-wider mb-2">Contact & Desk Hours</h4>
+                    <p class="text-xs text-gray-300"><i class="fa-solid fa-phone text-hotel-gold mr-1"></i> +63 917 888 9900 / (078) 333-4455</p>
+                    <p class="text-xs text-gray-300 mt-1"><i class="fa-solid fa-envelope text-hotel-gold mr-1"></i> reservations@stjosephhotelbaggao.ph</p>
+                    <p class="text-xs text-gray-300 mt-1"><i class="fa-solid fa-clock text-hotel-gold mr-1"></i> Front Desk: 24 Hours Open</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm text-white uppercase tracking-wider mb-2">Connect With Us</h4>
+                    <div class="flex space-x-3 text-base mb-4">
+                        <a href="#" class="w-9 h-9 rounded-full bg-hotel-green text-hotel-gold flex items-center justify-center hover:bg-hotel-gold hover:text-hotel-darkgreen transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-hotel-green text-hotel-gold flex items-center justify-center hover:bg-hotel-gold hover:text-hotel-darkgreen transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-hotel-green text-hotel-gold flex items-center justify-center hover:bg-hotel-gold hover:text-hotel-darkgreen transition-colors"><i class="fa-solid fa-globe"></i></a>
+                    </div>
+                    <button onclick="scrollToSection('home')" class="text-xs font-bold text-hotel-gold border border-hotel-gold px-3 py-1.5 rounded-lg hover:bg-hotel-gold hover:text-hotel-darkgreen transition-colors">
+                        <i class="fa-solid fa-arrow-up mr-1"></i> Back to Top
+                    </button>
+                </div>
+            </div>
+            <div class="border-t border-green-800 pt-6 text-center text-xs text-gray-400">
+                &copy; <span id="year"></span> St. Joseph Grand Hotel - Baggao, Cagayan, Philippines. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Navigation Drawer Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-2xl text-hotel-gold';
+            } else {
+                icon.className = 'fa-solid fa-xmark text-2xl text-hotel-gold';
+            }
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function selectRoomForBooking(roomName) {
+            document.getElementById('roomType').value = roomName;
+            scrollToSection('booking');
+        }
+
+        function handleQuickSearch(e) {
+            e.preventDefault();
+            const checkin = document.getElementById('qs-checkin').value;
+            const checkout = document.getElementById('qs-checkout').value;
+            const room = document.getElementById('qs-room').value;
+
+            document.getElementById('checkInDate').value = checkin;
+            document.getElementById('checkOutDate').value = checkout;
+            document.getElementById('roomType').value = room;
+
+            scrollToSection('booking');
+        }
+
+        // LocalStorage Data Operations
+        function getBookings() {
+            const data = localStorage.getItem('st_joseph_hotel_reservations_v2');
+            return data ? JSON.parse(data) : [];
+        }
+
+        function saveBookings(bookings) {
+            localStorage.setItem('st_joseph_hotel_reservations_v2', JSON.stringify(bookings));
+        }
+
+        function renderReservationsTable() {
+            const tbody = document.getElementById('reservations-body');
+            const bookings = getBookings();
+
+            tbody.innerHTML = '';
+
+            if (bookings.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="text-center py-8 text-gray-400 text-sm">
+                            No reservations created yet. Fill out the booking form above to add a guest!
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            bookings.forEach((b, index) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50 transition-colors";
+
+                // Dynamic Status Badge
+                let statusBadge = '';
+                if (b.status === 'Checked-In') {
+                    statusBadge = `<span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-bold uppercase"><i class="fa-solid fa-key mr-1"></i>Checked-In</span>`;
+                } else if (b.status === 'Checked-Out') {
+                    statusBadge = `<span class="bg-gray-100 text-gray-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase"><i class="fa-solid fa-person-walking-luggage mr-1"></i>Checked-Out</span>`;
+                } else if (b.status === 'Cancelled') {
+                    statusBadge = `<span class="bg-red-100 text-red-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase"><i class="fa-solid fa-ban mr-1"></i>Cancelled</span>`;
+                } else {
+                    statusBadge = `<span class="bg-blue-100 text-blue-800 text-[10px] px-2 py-0.5 rounded font-bold uppercase"><i class="fa-solid fa-clock mr-1"></i>Reserved</span>`;
+                }
+
+                tr.innerHTML = `
+                    <td class="py-3.5 px-4 font-bold text-hotel-green whitespace-nowrap">
+                        ${b.refNo}<br>
+                        ${statusBadge}
+                    </td>
+                    <td class="py-3.5 px-4 font-semibold text-gray-800 whitespace-nowrap">${b.name}</td>
+                    <td class="py-3.5 px-4 text-xs whitespace-nowrap">${b.phone}</td>
+                    <td class="py-3.5 px-4 text-xs text-gray-500 whitespace-nowrap">${b.email}</td>
+                    <td class="py-3.5 px-4 whitespace-nowrap">
+                        <span class="bg-yellow-100 text-yellow-900 text-xs px-2.5 py-1 rounded-md font-semibold">${b.room}</span>
+                    </td>
+                    <td class="py-3.5 px-4 text-xs whitespace-nowrap">
+                        <span class="font-medium text-gray-700">${b.checkin}</span> to <span class="font-medium text-gray-700">${b.checkout}</span>
+                    </td>
+                    <td class="py-3.5 px-4 text-xs text-gray-600 max-w-xs truncate" title="${b.requests}">
+                        ${b.requests ? b.requests : '<span class="text-gray-300 italic">None</span>'}
+                    </td>
+                    <td class="py-3.5 px-4 text-center whitespace-nowrap">
+                        <div class="flex items-center justify-center space-x-1.5">
+                            <button onclick="updateBookingStatus(${index}, 'Checked-In')" title="Check In Guest" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded shadow-sm transition-colors flex items-center gap-1">
+                                <i class="fa-solid fa-check"></i> Check-In
+                            </button>
+                            <button onclick="updateBookingStatus(${index}, 'Checked-Out')" title="Check Out Guest" class="px-2 py-1 bg-gray-600 hover:bg-gray-700 text-white text-xs font-bold rounded shadow-sm transition-colors flex items-center gap-1">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Check-Out
+                            </button>
+                            <button onclick="updateBookingStatus(${index}, 'Cancelled')" title="Cancel Reservation" class="px-2 py-1 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded shadow-sm transition-colors flex items-center gap-1">
+                                <i class="fa-solid fa-xmark"></i> Cancel
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function handleFormBooking(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('guestName').value.trim();
+            const phone = document.getElementById('guestPhone').value.trim();
+            const email = document.getElementById('guestEmail').value.trim();
+            const room = document.getElementById('roomType').value;
+            const checkin = document.getElementById('checkInDate').value;
+            const checkout = document.getElementById('checkOutDate').value;
+            const requests = document.getElementById('specialRequests').value.trim();
+
+            const randomRef = 'REF-' + Math.floor(100000 + Math.random() * 900000);
+
+            const newBooking = {
+                refNo: randomRef,
+                name,
+                phone,
+                email,
+                room,
+                checkin,
+                checkout,
+                requests,
+                status: 'Reserved'
+            };
+
+            const bookings = getBookings();
+            bookings.unshift(newBooking);
+            saveBookings(bookings);
+
+            // UI Alert Confirmation
+            const alertBox = document.getElementById('booking-alert');
+            alertBox.className = "mb-6 p-4 rounded-xl text-sm bg-green-100 border border-green-300 text-green-800 flex items-start space-x-2";
+            alertBox.innerHTML = `
+                <i class="fa-solid fa-circle-check text-green-600 text-base mt-0.5"></i>
+                <div>
+                    <strong>Reservation Created Successfully!</strong> Reference Code: <strong>${randomRef}</strong> for ${name}. Check the <strong>Manage Hotel Reservations</strong> table below to Check-In or Check-Out!
+                </div>
+            `;
+            alertBox.classList.remove('hidden');
+
+            document.getElementById('reservationForm').reset();
+            renderReservationsTable();
+            scrollToSection('reservations');
+        }
+
+        function updateBookingStatus(index, newStatus) {
+            const bookings = getBookings();
+            if (bookings[index]) {
+                bookings[index].status = newStatus;
+                saveBookings(bookings);
+                renderReservationsTable();
+            }
+        }
+
+        function clearAllBookings() {
+            if (confirm("Are you sure you want to clear all reservation records from memory?")) {
+                localStorage.removeItem('st_joseph_hotel_reservations_v2');
+                renderReservationsTable();
+            }
+        }
+
+        window.onload = function() {
+            renderReservationsTable();
+            
+            // Set Default Dates (Today & Tomorrow)
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            const todayStr = today.toISOString().split('T')[0];
+            const tomorrowStr = tomorrow.toISOString().split('T')[0];
+
+            document.getElementById('checkInDate').value = todayStr;
+            document.getElementById('checkOutDate').value = tomorrowStr;
+            document.getElementById('qs-checkin').value = todayStr;
+            document.getElementById('qs-checkout').value = tomorrowStr;
+        };
+    </script>
+</body>
+</html>
